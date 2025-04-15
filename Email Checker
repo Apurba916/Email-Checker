@@ -1,0 +1,49 @@
+#include <stdio.h>
+//I am mentioning this to use 
+#include <string.h>
+//I am using this function to return a boolean value.
+#include <stdbool.h>
+
+bool is_valid_email(const char* email){
+    const char* at_symbol = strchr(email, '@');
+    const char* dot = strrchr(email, '.');
+
+    if (at_symbol == NULL || *(at_symbol + 1) == '\0') {
+        return false; // No '@' or '.' found
+    }
+    else if (dot == NULL || dot < at_symbol)
+    {
+        return false;
+    }
+    else if (at_symbol == email || *(at_symbol + 1) == '\0')
+    {
+        return false;
+    }
+    else if (dot == at_symbol + 1 || *(dot + 1) == '\0')
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    
+    
+    
+}
+
+int main(){
+    //Let the user add their email address
+    char email[100];
+    printf("Enter an email address:");
+    fgets(email, sizeof(email), stdin);
+   //Check if the email address is valid or not.
+   if (is_valid_email(email))
+   {
+    printf("The email address is valid.\n");
+   }
+   else{
+    printf("The email address is not valid.\n");
+   }
+   return 0;
+}
